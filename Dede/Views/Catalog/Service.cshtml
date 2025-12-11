@@ -1,0 +1,113 @@
+﻿@model Dede.Domain.Entities.ServiceItem
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="section section-service-detail">
+    <div class="container service-detail-layout">
+        <div class="service-detail-info">
+            <a asp-controller="Catalog" asp-action="Index" class="back-link">← К каталогу</a>
+
+            <div class="service-detail-header">
+                <div class="service-icon">@Model.Icon</div>
+                <h1>@Model.Name</h1>
+            </div>
+
+            <p class="service-detail-category">@Model.Category</p>
+
+            <p class="service-detail-description">@Model.Description</p>
+
+            <p class="service-detail-price">
+                <strong>Цена от:</strong> @Model.MinPrice.ToString("0") ₽
+            </p>
+        </div>
+
+        <div class="service-detail-order">
+            <h2>Оформить заказ</h2>
+
+            @if (Model.IsActive)
+            {
+                <form id="serviceDetailOrderForm" class="modal-form">
+                    <input type="hidden" id="detailServiceId" value="@Model.Id"/>
+
+                    <input type="text" id="detailOrderPhone" placeholder="Телефон" required/>
+                    <input type="text" id="detailOrderAddress" placeholder="Адрес" required/>
+                    <input type="number" id="detailOrderQuantity" placeholder="Количество"
+                           min="1" value="1" required/>
+                    <textarea id="detailOrderNote" placeholder="Примечание (необязательно)"></textarea>
+
+                    <button type="submit" class="btn btn-primary" id="detailOrderSubmit">
+                        Заказать
+                    </button>
+                </form>
+            }
+            else
+            {
+                <p class="section-lead">Эта услуга временно недоступна.</p>
+            }
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("_MyOrders")
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('serviceDetailOrderForm');
+            if (!form) return;
+
+            const serviceIdInput = document.getElementById('detailServiceId');
+            const phoneInput = document.getElementById('detailOrderPhone');
+            const addressInput = document.getElementById('detailOrderAddress');
+            const qtyInput = document.getElementById('detailOrderQuantity');
+            const noteInput = document.getElementById('detailOrderNote');
+            const submitBtn = document.getElementById('detailOrderSubmit');
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const serviceItemId = parseInt(serviceIdInput.value, 10);
+                const phone = phoneInput.value.trim();
+                const address = addressInput.value.trim();
+                const quantity = parseInt(qtyInput.value, 10) || 1;
+                const note = noteInput.value.trim();
+
+                if (!phone || !address || !serviceItemId) {
+                    FormUtils.showError(form, 'Заполните все обязательные поля');
+                    return;
+                }
+
+                const payload = {
+                    serviceItemId,
+                    quantity,
+                    phone,
+                    address,
+                    note
+                };
+
+                try {
+                    FormUtils.setButtonLoading(submitBtn, true);
+
+                    const resp = await OrderAPI.create(payload);
+
+                    FormUtils.showSuccess(form, resp.message || 'Заказ создан');
+                    if (typeof loadOrders === 'function') {
+                        loadOrders();
+                    }
+
+                    setTimeout(() => {
+                        FormUtils.resetForm(form);
+                        qtyInput.value = '1';
+                    }, 500);
+                } catch (error) {
+                    const msg = error.message || 'Не удалось создать заказ';
+                    FormUtils.showError(form, msg);
+                } finally {
+                    FormUtils.setButtonLoading(submitBtn, false);
+                }
+            });
+        });
+    </script>
+}

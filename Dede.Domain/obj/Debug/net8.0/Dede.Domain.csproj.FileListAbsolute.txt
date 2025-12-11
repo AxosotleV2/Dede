@@ -1,0 +1,12 @@
+D:\.teh\Dede\Dede.Domain\bin\Debug\net8.0\Dede.Domain.deps.json
+D:\.teh\Dede\Dede.Domain\bin\Debug\net8.0\Dede.Domain.dll
+D:\.teh\Dede\Dede.Domain\bin\Debug\net8.0\Dede.Domain.pdb
+D:\.teh\Dede\Dede.Domain\obj\Debug\net8.0\Dede.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\.teh\Dede\Dede.Domain\obj\Debug\net8.0\Dede.Domain.AssemblyInfoInputs.cache
+D:\.teh\Dede\Dede.Domain\obj\Debug\net8.0\Dede.Domain.AssemblyInfo.cs
+D:\.teh\Dede\Dede.Domain\obj\Debug\net8.0\Dede.Domain.csproj.CoreCompileInputs.cache
+D:\.teh\Dede\Dede.Domain\obj\Debug\net8.0\Dede.Domain.sourcelink.json
+D:\.teh\Dede\Dede.Domain\obj\Debug\net8.0\Dede.Domain.dll
+D:\.teh\Dede\Dede.Domain\obj\Debug\net8.0\refint\Dede.Domain.dll
+D:\.teh\Dede\Dede.Domain\obj\Debug\net8.0\Dede.Domain.pdb
+D:\.teh\Dede\Dede.Domain\obj\Debug\net8.0\ref\Dede.Domain.dll

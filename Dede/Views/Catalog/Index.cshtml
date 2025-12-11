@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Каталог услуг";
+}
+
+<section class="section section-services">
+    <div class="container">
+        <h2 class="section-title">Каталог услуг</h2>
+
+        <div class="services-filters">
+            <div class="services-filter">
+                <label for="servicesCategory">Категория</label>
+                <select id="servicesCategory">
+                    <option value="">Все категории</option>
+                    @* Остальные варианты подставит JS *@
+                </select>
+            </div>
+
+            <div class="services-filter">
+                <label for="servicesSort">Сортировка</label>
+                <select id="servicesSort">
+                    <option value="">Без сортировки</option>
+                    <option value="priceAsc">Цена: по возрастанию</option>
+                    <option value="priceDesc">Цена: по убыванию</option>
+                </select>
+            </div>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <button type="button" class="btn btn-login services-add-btn">
+                    + Новая услуга
+                </button>
+            }
+        </div>
+
+        <div id="servicesGrid" data-page="catalog" class="services-grid">
+            @* Карточки рисует JS *@
+        </div>
+    </div>
+</section>
+
+@await Html.PartialAsync("_MyOrders")

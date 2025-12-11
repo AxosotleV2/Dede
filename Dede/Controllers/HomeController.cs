@@ -1,6 +1,6 @@
 using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using Dede.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Dede.Controllers;
 
@@ -15,8 +15,15 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        return RedirectToAction(nameof(SiteInformation));
+    }
+
+
+    public IActionResult SiteInformation()
+    {
         return View();
     }
+
 
     public IActionResult Privacy()
     {

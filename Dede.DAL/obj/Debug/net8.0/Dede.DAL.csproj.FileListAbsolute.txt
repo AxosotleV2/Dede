@@ -1,0 +1,16 @@
+D:\.teh\Dede\Dede.DAL\bin\Debug\net8.0\Dede.DAL.deps.json
+D:\.teh\Dede\Dede.DAL\bin\Debug\net8.0\Dede.DAL.dll
+D:\.teh\Dede\Dede.DAL\bin\Debug\net8.0\Dede.DAL.pdb
+D:\.teh\Dede\Dede.DAL\bin\Debug\net8.0\Dede.Domain.dll
+D:\.teh\Dede\Dede.DAL\bin\Debug\net8.0\Dede.Domain.pdb
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\Dede.DAL.csproj.AssemblyReference.cache
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\Dede.DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\Dede.DAL.AssemblyInfoInputs.cache
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\Dede.DAL.AssemblyInfo.cs
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\Dede.DAL.csproj.CoreCompileInputs.cache
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\Dede.DAL.sourcelink.json
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\Dede.DAL.csproj.Up2Date
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\Dede.DAL.dll
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\refint\Dede.DAL.dll
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\Dede.DAL.pdb
+D:\.teh\Dede\Dede.DAL\obj\Debug\net8.0\ref\Dede.DAL.dll

@@ -1,49 +1,191 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@* Views/Shared/_Layout.cshtml *@
+@{
+    var title = ViewData["Title"] as string ?? "ДомМастер - Профессиональные мастера на дом";
+}
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>@ViewData["Title"] - Dede</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/Dede.styles.css" asp-append-version="true"/>
+    <title>@title</title>
+    <link rel="stylesheet" href="~/css/shared.css" asp-append-version="true"/>
 </head>
-<body>
-<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Dede</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
-<div class="container">
-    <main role="main" class="pb-3">
-        @RenderBody()
-    </main>
-</div>
 
-<footer class="border-top footer text-muted">
-    <div class="container">
-        &copy; 2025 - Dede - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+<body>
+<div id="globalToast" class="toast"></div>
+<header>
+    <div class="header-container">
+        <a class="logo" asp-controller="Home" asp-action="SiteInformation">ДомМастер</a>
+
+        <button class="burger-btn" aria-label="Меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="main-nav">
+            <ul class="nav-menu">
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#orders">Мои заказы</a></li>
+                <li class="nav-catalog-link" style="display:none;"><a asp-controller="Catalog" asp-action="Index">Каталог</a></li> 
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+
+            <div class="auth-btns">
+                <button class="btn btn-login" data-modal="login">Войти</button>
+                <button class="btn btn-register" data-modal="register">Регистрация</button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+    @RenderBody()
+</main>
+
+<!-- Кнопка "Написать" -->
+<button class="contact-fab" data-modal="contact" title="Написать нам">💬</button>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>ДомМастер</h3>
+            <p>Профессиональные мастера для вашего дома</p>
+        </div>
+        <div class="footer-section">
+            <h4>Контакты</h4>
+            <p>Email: info@dommaster.ru</p>
+            <p>Телефон: +7 (800) 555-35-35</p>
+        </div>
+        <div class="footer-section">
+            <h4>Соцсети</h4>
+            <p>ВКонтакте | Telegram</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025 ДомМастер. Все права защищены.</p>
     </div>
 </footer>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
+
+<!-- Модальное окно входа -->
+<div class="modal" id="loginModal">
+    <div class="modal-overlay" data-close-modal></div>
+    <div class="modal-content">
+        <button class="modal-close" data-close-modal>&times;</button>
+        <h2>Вход в систему</h2>
+        <form class="modal-form">
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Пароль" required>
+            <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+
+        <button type="button"
+                class="btn btn-login"
+                style="margin-top:10px;width:100%;"
+                onclick="window.location.href='/api/auth/google-login'">
+            Войти через Google
+        </button>
+
+        <p class="modal-footer">Нет аккаунта?
+            <a href="#" data-switch-modal="register">Зарегистрируйтесь</a>
+        </p>
+    </div>
+</div>
+
+
+<!-- Модальное окно регистрации -->
+<div class="modal" id="registerModal">
+    <div class="modal-overlay" data-close-modal></div>
+    <div class="modal-content">
+        <button class="modal-close" data-close-modal>&times;</button>
+        <h2>Регистрация</h2>
+        <form class="modal-form">
+            <input type="text" placeholder="Имя" required>
+            <input type="email" placeholder="Email" required>
+            <input type="text" placeholder="Телефон" required>
+            <input type="password" placeholder="Пароль" required>
+            <input type="password" placeholder="Повторите пароль" required>
+            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+        </form>
+        <p class="modal-footer">Уже есть аккаунт? <a href="#" data-switch-modal="login">Войдите</a></p>
+    </div>
+</div>
+
+<!-- Модальное окно обратной связи -->
+<div class="modal" id="contactModal">
+    <div class="modal-overlay" data-close-modal></div>
+    <div class="modal-content">
+        <button class="modal-close" data-close-modal>&times;</button>
+        <h2>Написать нам</h2>
+        <form class="modal-form" id="contactForm">
+            <input type="text" id="contactName" placeholder="Ваше имя" required>
+            <input type="email" id="contactEmail" placeholder="Email" required>
+            <input type="text" id="contactSubject" placeholder="Тема" required>
+            <textarea id="contactMessage" placeholder="Сообщение" required></textarea>
+            <button type="submit" class="btn btn-primary" id="contactSubmit" disabled>Связаться</button>
+        </form>
+    </div>
+</div>
+
+<!-- Модальное окно создания/редактирования услуги (для админа) -->
+<div class="modal" id="serviceModal">
+    <div class="modal-overlay" data-close-modal></div>
+    <div class="modal-content">
+        <button class="modal-close" data-close-modal>&times;</button>
+        <h2 id="serviceModalTitle">Новая услуга</h2>
+        <form class="modal-form" id="serviceForm">
+            <input type="hidden" id="serviceId">
+
+            <input type="text" id="serviceName" placeholder="Название" required>
+            <input type="text" id="serviceCategory" placeholder="Категория" required>
+            <input type="text" id="serviceIcon" placeholder="Иконка (emoji)" value="🔧" required>
+            <input type="number" id="serviceMinPrice" placeholder="Минимальная цена" min="0" step="1" required>
+            <textarea id="serviceDescription" placeholder="Описание" required></textarea>
+
+            <label style="margin-top:8px;">
+                <input type="checkbox" id="serviceIsActive" checked>
+                Активна
+            </label>
+
+            <button type="submit" class="btn btn-primary" id="serviceSubmitBtn">
+                Сохранить
+            </button>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- Модальное окно заказа услуги -->
+<div class="modal" id="orderModal">
+    <div class="modal-overlay" data-close-modal></div>
+    <div class="modal-content">
+        <button class="modal-close" data-close-modal>&times;</button>
+        <h2>Оформление заказа</h2>
+        <form class="modal-form" id="orderForm">
+            <input type="hidden" id="orderServiceId"/>
+            <div id="orderServiceInfo"
+                 style="margin-bottom:10px;font-size:14px;color:var(--text-muted);"></div>
+
+            <input type="text" id="orderPhone" placeholder="Телефон" required>
+            <input type="text" id="orderAddress" placeholder="Адрес" required>
+            <input type="number" id="orderQuantity" placeholder="Количество"
+                   min="1" value="1" required>
+            <textarea id="orderNote" placeholder="Примечание (необязательно)"></textarea>
+
+            <button type="submit" class="btn btn-primary" id="orderSubmit">
+                Заказать
+            </button>
+        </form>
+    </div>
+</div>
+
+
+<script src="~/js/api-client.js" asp-append-version="true"></script>
+<script src="~/js/shared_script.js" asp-append-version="true" defer></script>
+
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -6,4 +6,21 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+        <ProjectReference Include="..\Dede.Service\Dede.Service.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" Version="12.1.1"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.3.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0-rc.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="Views\Admin\Services.cshtml"/>
+    </ItemGroup>
+
 </Project>

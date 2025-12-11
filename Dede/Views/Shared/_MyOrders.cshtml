@@ -1,0 +1,17 @@
+﻿@* Views/Shared/_MyOrders.cshtml *@
+<section id="orders" class="section section-orders">
+    <div class="container">
+        <h2 class="section-title">Мои заказы</h2>
+
+        <div id="ordersUnauthorized" style="display:none">
+            <p class="section-lead">
+                Чтобы увидеть свои заказы, нужно
+                <button type="button" class="btn btn-login" data-modal="login">войти</button>.
+            </p>
+        </div>
+
+        <div id="ordersContainer" class="orders-grid">
+            @* сюда JS (loadOrders) отрисует карточки заказов *@
+        </div>
+    </div>
+</section>
